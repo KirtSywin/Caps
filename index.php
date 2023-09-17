@@ -1,6 +1,4 @@
-<?php 
-   session_start();
-   if (!isset($_SESSION['username']) && !isset($_SESSION['id'])) {   ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +10,7 @@
 <body>
 <div class="form-container">
 			<form class="mx-auto"
-		      action="./php/check-login.php" 
+		      action="check-login.php" 
 		      method="post"
 			  style ="background-color: #FFFACD">
 			  <img src="img/ourlogo.png" alt="Logo" class="logo">
@@ -50,6 +48,3 @@
       </div>
 </body>
 </html>
-<?php }else{
-	header("Location: index.php");
-} ?>

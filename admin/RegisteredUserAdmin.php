@@ -58,6 +58,13 @@
         <span class="tooltip">Registered Admin/User</span>
       </li>
       <li>
+          <a href="RegisteredUserAdmin.php">
+            <i class="bx bx-user-pin"></i>
+            <span class="link_name">Registered Admin/User</span>
+          </a>
+          <span class="tooltip">Registered</span>
+      </li>
+      <li>
         <a href="#">
           <i class="bx bx-cog"></i>
           <span class="link_name">Settings</span>

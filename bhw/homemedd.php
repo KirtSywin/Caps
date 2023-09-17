@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <?php
 	require_once '../admin_query/validate.php';

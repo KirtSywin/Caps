@@ -12,10 +12,10 @@
   <link rel="stylesheet" href="../cssmainmenu/style.css">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <link rel = "stylesheet" type = "text/css" href = "../css/bootstrap.css " />
-		<link rel = "stylesheet" type = "text/css" href = "../css/style.css" />
+ <link rel = "stylesheet" type = "text/css" href = "../css/style.css" />
 
 </head>
-<body> 
+<body>
   <div class="sidebar">
     <div class="logo_details">
       <div class="logo_name">Admin</div>
@@ -41,7 +41,7 @@
           <i class="bx bx-capsule"></i>
           <span class="link_name">Contraceptive Records</span>
         </a>
-        <span class="tooltip">Contraceptive Records</span>
+        <span class="tooltip">Contraceptives</span>
       </li>
       <li>
         <a href="records.php">
@@ -51,20 +51,20 @@
         <span class="tooltip">Records</span>
       </li>
       <li>
-        <a href="RegisteredUserAdmin.php">
-          <i class="bx bx-user-pin"></i>
-          <span class="link_name">Registered Admin/User</span>
-        </a>
-        <span class="tooltip">Registered Admin/User</span>
+          <a href="RegisteredUserAdmin.php">
+            <i class="bx bx-user-pin"></i>
+            <span class="link_name">Registered Admin/User</span>
+          </a>
+          <span class="tooltip">Registered</span>
       </li>
-      <li>
+        <li>
           <a href="account.php">
             <i class="bx bx-user-pin"></i>
             <span class="link_name">Accout</span>
           </a>
           <span class="tooltip">Account</span>
         </li>
-      <li>
+        <li>
         <a href="#">
           <i class="bx bx-cog"></i>
           <span class="link_name">Settings</span>
@@ -76,7 +76,7 @@
           <img src="../img/admin-default.png" alt="profile image">
           <div class="profile_content">
             <div class="name"><?php echo $name; ?></div>
-            <a href="../logout.php">
+           <a href="../logout.php">
             <span class="link_name">Logout</span>
             </a>
           </div>
@@ -86,32 +86,40 @@
     </ul>
   </div>
   <section class="home-section">
-  <div class="text">Medicine</div>
-  <div class="container-fluid">
-		<div class="panel panel-default">
-			<div class="panel-body">
-      <div class = "alert alert-info">Medicine Records</div>
-				<table id="table" class="table table-bordered">
+    <div class="text">Account</div>
+    <div class = "container-fluid">
+		<div class = "panel panel-default">
+			<div class = "panel-body">
+				<div class = "alert alert-info">Accounts</div>
+				<a class = "btn btn-success" href = "add_account.php"><i class = "glyphicon glyphicon-plus"></i> Create New Account</a>
+				<br />
+				<br />
+				<?php if (isset($_GET['success'])) { ?>
+      	      <div class="alert alert-success" role="alert">
+				  <?=$_GET['success']?>
+			  </div>
+			  <?php } ?>
+				<table id = "table" class = "table table-bordered">
 					<thead>
 						<tr>
-							<th>Product Name</th>
-						
-							<th>Quantity</th>
-							<th>Expiration Date</th>
-							<th>Status</th>
-	
+						<th>Name</th>
+							<th>Username</th>
+							<th>Role</th>
+							<th>Password</th>
 						</tr>
 					</thead>
 					<tbody>
-						<?php
-							$query = $conn->query("SELECT * FROM `medicines`") or die(mysqli_error());
-							while ($fetch = $query->fetch_array()) {
-							?>
-								<tr>
-									<td><?php echo $fetch['productName'] ?></td>
-									<td><?php echo $fetch['total'] ?></td>
-									<td><?php echo $fetch['expDate'] ?></td>
-                                    <td><?php echo $fetch['status'] ?></td>
+						<?php  
+							$query = $conn->query("SELECT * FROM `users`") or die(mysqli_error());
+							while($fetch = $query->fetch_array()){
+						?>
+						<tr>
+						<td><?php echo $fetch['username']?></td>
+							<td><?php echo $fetch['name']?></td>
+							<td><?php echo $fetch['role']?></td>
+							<td><?php echo md5($fetch['password'])?></td>
+							<td><center><a class = "btn btn-warning" href = "edit_account.php?id=<?php echo $fetch['id']?>"> Edit</a> <a class = "btn btn-danger" onclick = "confirmationDelete(this); return false;" href = "../admin_query/delete_account.php?id=<?php echo $fetch['id']?>"> Delete</a></center></td>
+						</tr>
 						<?php
 							}
 						?>
@@ -121,27 +129,7 @@
 		</div>
 	</div>
   </section>
-              <?php require_once '../admin_query/add_query_med.php'?>
-            </div>
-          </div>
-        </div>
-        
-      </div>
-      <br />
-      <br />
-            </form>
-          </div>
-        </div>
-			 </section>	
   <!-- Scripts -->
-<script src="../cssmainmenu/script.js"></script>
-<script src="../js/jquery.js"></script>
-<script src="../js/jquery.dataTables.js"></script>
-<script src="../js/dataTables.bootstrap.js"></script>
-<script type="text/javascript">
-	$(document).ready(function () {
-		$("#table").DataTable();
-	});
-</script>
+  <script src="../cssmainmenu/script.js"></script>
 </body>
 </html>

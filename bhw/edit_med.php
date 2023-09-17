@@ -80,78 +80,51 @@
   </div>
   <section class="home-section"> 
   <div class="text">Medicine</div>
-    <div class="container-fluid">
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <div class="alert alert-info">Medicine</div>
-          <a href="add_med.php" class="btn btn-success" data-target="#exampleModalCenter"><i class="glyphicon glyphicon-plus"></i> Add Medicine</a>
-</a>
-
-           <br />
-          <br />
-      
-          <?php if (isset($_GET['success'])) { ?>
-            <div class="alert alert-success" role="alert">
-              <?=$_GET['success']?>
-            </div>
-            <?php } ?>
-          
-          <table id="table" class="table table-bordered">
-            <thead>
-              <tr>
-                <th>Product Name</th>
-                <th>Quantity</th>
-                <th>Expiration Date</th>
-                <th>Status</th>
-                <th>Request</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php
-                $query = $conn->query("SELECT * FROM `medicines`") or die(mysqli_error());
-                while ($fetch = $query->fetch_array()) {
-                  $status = $fetch['status'];
-                  $disableButton = ($status == 'unavailable') ? 'disabled' : ''; // Check status and disable button if 'Unavailable'
-              ?>
-                  <!-- ... -->
-                  <tr>
-                    <td><?php echo $fetch['productName'] ?></td>
-                
-                    <td><?php echo $fetch['total'] ?></td>
-                    <td><?php echo $fetch['expDate'] ?></td>
-                    <td><?php echo $status ?></td>
-                  <!-- ... -->
-                  <td>
-                    <center>
-                      <?php if ($status == 'unavailable'): ?>
-                        <button class="btn btn-warning" disabled>Request</button>
-                      <?php else: ?>
-                        <a class="btn btn-warning" href="request.php?productName=<?php echo urlencode($fetch['productName']); ?>">Request</a>
-                      <?php endif; ?>
-                    </center>
-                  </td>
-  <!-- ... -->
-                    
-                    <td>
-                      <center>
-                        <a class="btn btn-warning" href="edit_med.php?productId=<?php echo $fetch['productId'] ?>"></i> Edit</a>
-                        <a class="btn btn-danger" onclick="confirmationDelete(this); return false;" href="../admin_query/delete_med.php?productId=<?php echo $fetch['productId'] ?>">Delete</a>
-                      </center>
-                    </td>
-                  </tr>
-  <!-- ... -->
-  
-              <?php
-                }
-              ?>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-
+  <div class = "container-fluid">
+		<div class = "panel panel-default">
+			<div class = "panel-body">
+				<div class = "alert alert-info">Edit</div>
+				<br />
+				<div class = "col-md-4">
+					<?php
+						$query = $conn->query("SELECT * FROM `medicines` WHERE `productId` = '$_REQUEST[productId]'") or die(mysqli_error());
+						$fetch = $query->fetch_array();
+					?>
+					<form method = "POST" enctype = "multipart/form-data">
+					<div class = "form-group">
+							<label>Product Name </label>
+							<input type = "text"  class = "form-control" name = "productName" value = "<?php echo $fetch['productName']?>" />
+						</div>
+					<div class = "form-group">
+							<label>Quantity </label>
+							<input type = "number" min = "0" max = "999999999" class = "form-control" name = "total" value = "<?php echo $fetch['total']?>" readonly/>
+						</div>
+						<div class = "form-group">
+							<label>Add Quantity </label>
+							<input type = "number"  min = "0" max = "999999999" class = "form-control" name = "quantity1" value=0 />
+						</div>
+						<div class = "form-group">
+							<label>Expiration Date </label>
+								<input type = "date"  class = "form-control" name = "expDate" value = "<?php echo $fetch['expDate']?>" />
+						</div>
+						<div class = "form-group">
+							<label>Status</label>
+							<select class = "form-control" required = required name = "status">
+								<option value="available">Available</option>
+								<option value="unavailable">Unavailable</option>
+							</select>
+						</div>
+						
+						<br />
+						<div class = "form-group">
+							<button name = "edit_med" class = "btn btn-warning form-control"><i class = "glyphicon glyphicon-edit"></i> Save Changes</button>
+						</div>
+					</form>
+					<?php require_once '../admin_query/edit_query_med.php'?>
+				</div>
+			</div>
+		</div>
+	</div>
   </section>
   
 

@@ -6,13 +6,12 @@
 	require '../admin_query/name.php';
 ?>
 <head>
-  <title>Responsive Sidebar</title>
+  <title>Add Account</title>
   <!-- Link Styles -->
   <link rel="stylesheet" href="../cssmainmenu/style.css">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <link rel = "stylesheet" type = "text/css" href = "../css/bootstrap.css " />
  <link rel = "stylesheet" type = "text/css" href = "../css/style.css" />
-
 </head>
 <body>
   <div class="sidebar">
@@ -90,21 +89,17 @@
 		<div class = "panel panel-default">
 			<div class = "panel-body">
 				<div class = "alert alert-info">Account / Create Account</div>
-			
 				<div class = "col-md-4">	
 <div class="form-container">
 
    <form action="" method="POST">
-   <?php if (isset($_GET['error'])) { ?>
-      	      <div class="alert alert-danger" role="alert">
-				  <?=$_GET['error']?>
-			  </div>
-			  <?php } ?>
-	 <?php if (isset($_GET['success'])) { ?>
-      	      <div class="alert alert-success" role="alert">
-				  <?=$_GET['success']?>
-			  </div>
-			  <?php } ?>
+   <?php if (isset($_SESSION['error_message'])) { ?>
+    <div class="alert alert-danger" role="alert">
+        <?php echo $_SESSION['error_message']; ?>
+    </div>
+    <?php unset($_SESSION['error_message']); ?>
+    <?php } ?>
+
 	   <br></br>
 	   <div class = "form-group">
 			<label>Name </label>
@@ -144,27 +139,24 @@ if(isset($_POST['submit'])){
    $cpass = md5($_POST['cpassword']);
    $role = $_POST['role'];
 
-   $select = " SELECT * FROM users WHERE name = '$name' && password = '$pass' ";
-
+   $select = " SELECT * FROM users WHERE name = '$name'";
    $result = mysqli_query($conn, $select);
 
    if(mysqli_num_rows($result) > 0){
-
-	header("Location: ../admin/add_account.php?error=user already exist!");
-
+    $_SESSION['error_message'] = "Username already exists!";
+	    header("Location: ../admin/add_account.php?error=Username already exist!");
    }else{
 
       if($pass != $cpass){
-		header("Location: ../admin/add_account.php?error=password not matched!");
+		      header("Location: ../admin/add_account.php?error=Password not matched!");
       }else{
          $insert = "INSERT INTO users(name,username, password, role) VALUES('$name','$username','$pass','$role')";
          mysqli_query($conn, $insert);
-         header('location: ../admin/add_account.php?success=Add Account Sucessfully');
+         header('location:../admin/add_account.php?');
       }
    }
 
 };
-
 
 ?>
   </section>

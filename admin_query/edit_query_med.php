@@ -7,6 +7,6 @@
 		$expDate = $_POST['expDate'];
 		$status = $_POST['status'];
 		$conn->query("UPDATE `medicines` SET `productName` = '$productName',`quantity1` = '$quantity1',`total` = '$total',`expDate` = '$expDate',`status` = '$status' WHERE `productId` = '$_REQUEST[productId]'") or die(mysqli_error());
-		header("Location: ../admin/medicine.php?success=Update Succesfully");
+		header("Location: ../bhw/medicinee.php?success=Update Succesfully");
 	}
 ?>

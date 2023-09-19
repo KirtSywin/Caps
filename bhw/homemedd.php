@@ -76,7 +76,7 @@
         <span class="tooltip">Analytics</span>
       </li>
       <li>
-        <a href="userRecMedd.php">
+        <a href="userRecMed.php">
           <i class="bx bx-folder"></i>
           <span class="link_name">Records</span>
         </a>

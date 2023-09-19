@@ -1,86 +1,41 @@
-
 <!DOCTYPE html>
-<html lang="en">
-  <?php
+<?php
 	require_once '../admin_query/validate.php';
 	require '../admin_query/name.php';
-	@include '../connection/connect.php';
 ?>
+
+<html lang="en">
 <head>
-  <title>Responsive Sidebar</title>
-  <!-- Link Styles -->
-  <link rel="stylesheet" href="../cssmainmenu/style.css">
-  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-  <link rel = "stylesheet" type = "text/css" href = "../css/bootstrap.css " />
-  <link rel = "stylesheet" type = "text/css" href = "../css/style.css" />
+	<title>Barangay Health Worker</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="../css/style.css" />
 </head>
+
 <body>
-  <div class="sidebar">
-    <div class="logo_details">
-      <div class="logo_name">Barangay Health Worker</div>
-      <i class="bx bx-menu" id="btn"></i>
-    </div>
-    <ul class="nav-list">
-      <li>
-        <a href="homemedd.php">
-          <i class="bx bx-grid-alt"></i>
-          <span class="link_name">Dashboard</span>
-        </a>
-        <span class="tooltip">Dashboard</span>
-      </li>
-      <li>
-        <a href="../logout.php">
-          <i class="bx bx-chat"></i>
-          <span class="link_name">Anouncements</span>
-        </a>
-        <span class="tooltip">Anouncements</span>
-      </li>
-      <li>
-        <a href="#">
-          <i class="bx bx-pie-chart-alt-2"></i>
-          <span class="link_name">Analytics</span>
-        </a>
-        <span class="tooltip">Analytics</span>
-      </li>
-      <li>
-        <a href="userRecMedd.php">
-          <i class="bx bx-folder"></i>
-          <span class="link_name">Records</span>
-        </a>
-        <span class="tooltip">Records</span>
-      </li>
-      <li>
-        <a href="medicinee.php">
-          <i class="bx bx-cart-alt"></i>
-          <span class="link_name">Medicine</span>
-        </a>
-        <span class="tooltip">Medicine</span>
-      </li>
-      <li>
-        <a href="#">
-          <i class="bx bx-cog"></i>
-          <span class="link_name">Settings</span>
-        </a>
-        <span class="tooltip">Settings</span>
-      </li>
-      <li class="profile">
-        <div class="profile_details">
-          <img src="../img/admin-default.png" alt="profile image">
-          <div class="profile_content">
-            <div class="name"><?php echo $name;?></div>
-            <a href="../logout.php">
-            <span class="link_name">Logout</span>
-            </a>
-          </div>
-        </div>
-          <i class="bx bx-log-out" id="log_out"></i>
-          <a href="../logout.php"></a>
-      </li>
-    </ul>
-  </div>
-  <section class="home-section"> 
-  <div class="text">Request</div>
-  <div class="container-fluid">
+	<nav style="background-color:rgba(0, 0, 0, 0.1);" class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand">Barangay Health Worker</a>
+			</div>
+			<ul class="nav navbar-nav pull-right">
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $name; ?></a>
+				</li>
+				<li><a href="../logout.php">Logout</a></li>
+			</ul>
+		</div>
+	</nav>
+	<div class="container-fluid">
+		<ul class="nav nav-pills">
+			<li><a href="homemed.php">Home</a></li>
+			<li class="active"><a href="medicine.php">Medicine</a></li>
+			<li class=""><a href="userRecMed.php">Records</a></li>
+		</ul>
+	</div>
+	<br />
+	<div class="container-fluid">
 		<div class="panel panel-default">
 			<div class="panel-body">
 				<div class="alert alert-info">Request Form</div>
@@ -140,7 +95,7 @@
 						</div>
 						<div class="form-group" required="required">
 							<label>Quantity</label>
-							<input type="number" value=0 min="0" max="999999999" class="form-control" name="quantity_req" />
+							<input type="number" min="0" max="999999999" class="form-control" name="quantity_req" />
 						</div>
 						<div class="form-group" required="required">
 							<label>Given Date</label>
@@ -155,27 +110,7 @@
 			</div>
 		</div>
 	</div>
-
-  </section>
-  
-
-  <script src="../cssmainmenu/script.js"></script>
-  <script type = "text/javascript">
-	function confirmationDelete(anchor){
-		var conf = confirm("Are you sure you want to delete this record?");
-		if(conf){
-			window.location = anchor.attr("href");
-		}
-	} 
-</script>
-<script src = "../js/jquery.js"></script>
-<script src = "../js/jquery.dataTables.js"></script>
-<script src = "../js/dataTables.bootstrap.js"></script>	
-<script type = "text/javascript">
-	$(document).ready(function(){
-		$("#table").DataTable();
-	});
-</script>
+	<br />
+	<br />
 </body>
 </html>
-

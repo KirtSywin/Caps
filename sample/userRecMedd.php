@@ -12,6 +12,7 @@
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <link rel = "stylesheet" type = "text/css" href = "../css/bootstrap.css " />
   <link rel = "stylesheet" type = "text/css" href = "../css/style.css" />
+
 </head>
 <body>
   <div class="sidebar">
@@ -77,54 +78,67 @@
     </ul>
   </div>
   <section class="home-section">
-    <div class="text">Add Medicine</div>
+    <div class="text">Records</div>
     <div class = "container-fluid">
 		<div class = "panel panel-default">
 			<div class = "panel-body">
-			
-				<div class = "alert alert-info">Add Medicine</div>
+				<div class = "alert alert-info">Records</div>
+				
 				<br />
-				<div class = "col-md-4">	
-
 				<?php if (isset($_GET['success'])) { ?>
-      	      <div class="alert alert-success" role="alert">
-				  <?=$_GET['success']?>
-			  </div>
-			  <?php } ?>
+					<div class="alert alert-success" role="alert">
+						<?=$_GET['success']?>
+					</div>
+					<?php } ?>
+				<br />
+				<table id = "table" class = "table table-bordered">
+					<thead>
+						<tr>
+							
+							<th>Resident Name</th>
+							<th>Date of Birth</th>
+							<th>Age</th>
+							<th>Sex</th>
+							<th>Address</th>
+							<th>Contact Number</th>
+							<th>Product Name</th>
+							<th>Quantity</th>
+							<th>Given Date</th>
+							<th>Action</th>
+							
 
-					<form method = "POST" enctype = "multipart/form-data">
-						<div class = "form-group">
-							<label>Product Name </label>
-							<input type = "text"  class = "form-control" name = "productName" />
-						</div>
-						<div class = "form-group">
-							<label>Quantity </label>
-							<input type = "number" min = "0" max = "999999999" class = "form-control" name = "total" />
-						</div>
-						<div class = "form-group">
-							<label>Expiration Date </label>
-								<input type = "date"  class = "form-control" name = "expDate" />
-						</div>
+						</tr>
+					</thead>
+					<tbody>
+					<?php
+						$query = $conn->query("SELECT * FROM `residentrecords`") or die(mysqli_error());
+						while($fetch = $query->fetch_array()){
+					?>	
+						<tr>
+							
+							<td><?php echo $fetch['residentName']?></td>
+							<td><?php echo $fetch['dateBirth']?></td>
+							<td><?php echo $fetch['age']?></td>
+							<td><?php echo $fetch['sex']?></td>
+							<td><?php echo $fetch['address']?></td>
+							<td><?php echo $fetch['contactNumber']?></td>
+							<td><?php echo $fetch['productName']?></td>
+							<td><?php echo $fetch['quantity_req']?></td>
+							<td><?php echo $fetch['givenDate']?></td>
+							<td><center> <a class = "btn btn-danger" onclick = "confirmationDelete(this); return false;" href = "../admin_query/delete_rec.php?residentId=<?php echo $fetch['residentId']?>"> Delete</a></center></td>
+						</tr>
 						
-						<div class = "form-group">
-							<label>Status</label>
-							<select class = "form-control" required = required name = "status">
-								<option value="available">Available</option>
-								<option value="unavailable">Unavailable</option>
-							</select>
-						</div>
-						
-						<br />
-						<br />
-						<div class = "form-group">
-							<button name = "add_med" class = "btn btn-info form-control"><i class = "glyphicon glyphicon-save"></i> Saved</button>
-						</div>
-					</form>
-					<?php require_once '../admin_query/add_query_med.php'?>
-				</div>
+					<?php
+						}
+					?>	
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>
+
+
+  </section>
   <!-- Scripts -->
   <script src="../cssmainmenu/script.js"></script>
   <script type = "text/javascript">

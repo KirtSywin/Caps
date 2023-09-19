@@ -140,7 +140,7 @@
 						</div>
 						<div class="form-group" required="required">
 							<label>Quantity</label>
-							<input type="number" min="0" max="999999999" class="form-control" name="quantity_req" />
+							<input type="number" value=0 min="0" max="999999999" class="form-control" name="quantity_req" />
 						</div>
 						<div class="form-group" required="required">
 							<label>Given Date</label>

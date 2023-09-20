@@ -74,15 +74,14 @@
       <li class="profile">
         <div class="profile_details">
           <img src="../img/admin-default.png" alt="profile image">
-          <div class="profile_content">
-            <div class="name"><?php echo $name; ?></div>
-            <a href="../logout.php">
-            <span class="link_name">Logout</span>
-            </a>
+           <div class="profile_content">
+          <div class="name"><?php echo $name; ?></div>
           </div>
-        </div>
-        <i class="bx bx-log-out" id="log_out"></i>
-      </li>
+          </div>
+  <a href="../logout.php" id="log_out">
+    <i class="bx bx-log-out"></i>
+  </a>
+  </li>
     </ul>
   </div>
   <section class="home-section">

@@ -24,7 +24,7 @@ if (isset($_POST['add_rec'])) {
         $query = $conn->query("INSERT INTO `residentrecords` (productId, residentName, dateBirth, age, sex, address, contactNumber, productName, quantity_req, givenDate) VALUES ('$productId', '$residentName', '$dateBirth', '$age', '$sex', '$address', '$contactNumber', '$productName', '$quantity_req', '$givenDate')");
 
         if ($query) {
-            header("Location: ../bhw/userRecMed.php?success=Add Request Successfully");
+            echo '<script>window.location.href = "./userRecMed.php?success=Add Request Successfully";</script>';
             exit(); // Add this line to stop further script execution
         } else {
             echo "Error: " . mysqli_error($conn);
